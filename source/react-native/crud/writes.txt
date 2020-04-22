@@ -29,26 +29,7 @@ Realm is ACID Compliant
 Run a Transaction
 -----------------
 
-{+client-database+} represents each transaction as a callback function
-that contains zero or more read and write operations. To run
-a transaction, define a transaction callback and pass it to
-the {+realm+}'s ``write`` method. Within this callback, you are
-free to create, read, update, and delete on the {+realm+}. If
-the code in the callback throws an exception when {+client-database+} runs
-it, {+client-database+} cancels the transaction. Otherwise, {+client-database+} commits
-the transaction immediately after the callback.
-
-.. admonition:: Concurrency Concerns
-   :class: important
-
-   Since transactions block each other, it is best to avoid
-   opening transactions on both the UI thread and a
-   background thread. If you are using :doc:`Sync
-   </sync/sync-overview>`, avoid opening transactions on the
-   UI thread altogether, as {+client-database+} processes synchronizations
-   on a background thread. If a background transaction
-   blocks your UI thread's transaction, your app may appear
-   unresponsive.
+.. include:: /client-guides/crud/writes/open-a-transaction.rst
 
 .. example::
 
@@ -64,35 +45,27 @@ the transaction immediately after the callback.
 Create an Object
 ----------------
 
-In general, instantiate :doc:`{+service-short+} objects
-</data-model/objects>` as you would any other object. In a
-transaction, you can add the object to the {+realm+} if the
-{+realm+}'s :ref:`schema <realm-schema>` includes the object
-type. When you add an instance to the {+realm+}, it becomes
-*managed* by that {+realm+}.
-
-With the Java and JavaScript SDKs, instead use the {+realm+}'s
-factory method in a transaction to instantiate your class.
-This automatically inserts the instance into the {+realm+}.
+.. include:: /client-guides/crud/writes/create-an-object.rst
 
 .. example::
 
    This code demonstrates how to create an object with {+client-database+}:
 
-   .. include:: /examples/CRUD/Create.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/Create.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 .. _react-native-upsert:
 
 Upsert an Object
 ~~~~~~~~~~~~~~~~
 
-An **upsert** is a write operation that either inserts a new object
-with a given primary key or updates an existing object that already has
-that primary key. We call this an upsert because it is an "**update** or
-**insert**" operation. This is useful when an object may or may not
-already exist, such as when bulk importing a dataset into an existing
-{+realm+}. Upserting is an elegant way to update existing entries while
-adding any new entries.
+.. include:: /client-guides/crud/writes/upsert.rst
 
 .. example::
 
@@ -100,33 +73,42 @@ adding any new entries.
    {+realm+}. We create a new user named "Drew" and then update
    their name to "Andy" via upsert:
 
-   .. include:: /examples/CRUD/Upsert.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/Upsert.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 .. _react-native-update:
 
 Update an Object
 ----------------
 
-Within a transaction, you can update a {+service-short+} object the same
-way you would update any other object in your language of
-choice: just assign a new value to the property or update
-the property.
+.. include:: /client-guides/crud/writes/update.rst
 
 .. example::
 
    This code changes the dog's name to "Wolfie" and
    increments the age by 1:
 
-   .. include:: /examples/CRUD/Update.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/Update.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 .. _react-native-batch-update:
 
 Update a Collection
 ~~~~~~~~~~~~~~~~~~~
 
-{+client-database+} supports collection-wide updates. A collection update
-applies the same update to specific properties of several
-objects in a collection at once.
+.. include:: /client-guides/crud/writes/batch-update.rst
 
 .. example::
 
@@ -136,107 +118,119 @@ objects in a collection at once.
    ``owner`` property and the Person's ``dogs`` property,
    {+client-database+} automatically updates Ali's list of dogs.
 
-   .. include:: /examples/CRUD/BatchUpdate.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/BatchUpdate.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 .. _react-native-delete:
 
 Delete an Object
 ----------------
 
-In general, to delete an object from a {+realm+}, pass the
-instance to the delete method of the {+realm+} within a
-transaction.
+.. include:: /client-guides/crud/writes/delete.rst
 
-With the Java SDK, call ``deleteFromRealm()`` on the
-instance itself.
-
-.. admonition:: Do not use objects after delete
-   :class: important
-
-   {+client-database+} throws an error if you try to use an object after
-   it has been deleted.
+With the Java SDK, call ``deleteFromRealm()`` on the instance itself.
 
 .. example::
 
-   The following code shows how to delete one object from
-   its {+realm+}:
+   The following code shows how to delete one object from its {+realm+}:
 
-   .. include:: /examples/CRUD/Delete.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/Delete.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 .. _react-native-delete-collection:
 
 Delete a Collection
 ~~~~~~~~~~~~~~~~~~~
 
-In general, to delete a collection of objects from a {+realm+},
-pass the collection to the delete method of the {+realm+} within
-a transaction.
-
-With the Java SDK, call ``deleteFromRealm()`` on the
-collection itself.
+.. include:: /client-guides/crud/writes/delete-collection.rst
 
 .. example::
 
-   The following code demonstrates how to delete a
-   collection from a {+realm+}:
+   The following code demonstrates how to delete a collection from a {+realm+}:
 
-   .. include:: /examples/CRUD/DeleteCollection.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/DeleteCollection.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 .. _react-native-cascading-delete:
 
 Cascading Delete
 ~~~~~~~~~~~~~~~~
 
-Sometimes, you have :doc:`dependent objects
-</data-model/relationships>` that you want to delete when
-you delete the parent object. We call this a **cascading
-delete**. {+client-database+} will not delete the dependent objects for
-you. If you do not delete the objects yourself, they will
-remain orphaned in your {+realm+}. Whether or not this is a
-problem depends on your application's needs.
-
-Currently, the best way to delete dependent objects is to
-iterate through the dependencies and delete them before
-deleting the parent object.
+.. include:: /client-guides/crud/writes/cascading-delete.rst
 
 .. example::
 
-   The following code demonstrates how to perform a
-   cascading delete by first deleting all of Ali's dogs,
-   then deleting Ali:
+   The following code demonstrates how to perform a cascading delete by first
+   deleting all of Ali's dogs, then deleting Ali:
 
-   .. include:: /examples/CRUD/CascadingDelete.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/CascadingDelete.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 .. _react-native-delete-all-of-object:
 
 Delete All Instances of a Type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-{+client-database+} supports deleting all instances of a :doc:`{+service-short+} type
-</data-model/objects>` from a {+realm+}.
+.. include:: /client-guides/crud/writes/delete-all-of-object.rst
 
 .. example::
 
    The following code demonstrates how to delete all
    Dog instances from a {+realm+}:
 
-   .. include:: /examples/CRUD/DeleteAllOfClass.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/DeleteAllOfClass.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 .. _react-native-delete-all:
 
 Delete Everything
 ~~~~~~~~~~~~~~~~~
 
-It is possible to delete all objects from the {+realm+}. This
-does not affect the schema of the {+realm+}. This is useful for
-quickly clearing out your {+realm+} while prototyping.
+.. include:: /client-guides/crud/writes/delete-all.rst
 
 .. example::
 
    The following code demonstrates how to delete everything
    from a {+realm+}:
 
-   .. include:: /examples/CRUD/DeleteAll.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/DeleteAll.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 Summary
 -------
