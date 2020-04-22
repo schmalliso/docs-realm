@@ -7,4 +7,10 @@ Android
    :caption: Get Started
 
    Install Realm for Android </get-started/install-android>
-   Call a Function </functions/call-a-function>
+
+.. toctree::
+   :titlesonly:
+   :caption: Read & Write Data
+
+   Reads </android/crud/reads>
+   Writes </android/crud/writes>
