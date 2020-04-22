@@ -38,7 +38,14 @@ Run a Transaction
    throws an exception, {+client-database+} cancels the transaction.
    Otherwise, {+client-database+} commits the transaction.
 
-   .. include:: /examples/CRUD/Transaction.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: javascript
+   
+         .. literalinclude:: /examples/CRUD/Transaction.js
+            :language: javascript
+            :emphasize-lines: 4, 11
 
 .. _react-native-create-an-object:
 

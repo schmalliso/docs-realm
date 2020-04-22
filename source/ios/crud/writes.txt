@@ -38,7 +38,21 @@ Run a Transaction
    throws an exception, {+client-database+} cancels the transaction.
    Otherwise, {+client-database+} commits the transaction.
 
-   .. include:: /examples/CRUD/Transaction.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: objective-c
+   
+         .. literalinclude:: /examples/CRUD/Transaction.m
+            :language: objective-c
+            :emphasize-lines: 5, 10
+   
+      .. tab::
+         :tabid: swift
+   
+         .. literalinclude:: /examples/CRUD/Transaction.swift
+            :language: swift
+            :emphasize-lines: 5, 15
 
 .. _ios-create-an-object:
 

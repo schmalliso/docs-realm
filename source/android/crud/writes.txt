@@ -38,7 +38,21 @@ Run a Transaction
    throws an exception, {+client-database+} cancels the transaction.
    Otherwise, {+client-database+} commits the transaction.
 
-   .. include:: /examples/CRUD/Transaction.rst
+   .. tabs-realm-languages::
+   
+      .. tab::
+         :tabid: java
+   
+         .. literalinclude:: /examples/CRUD/Transaction.java
+            :language: java
+            :emphasize-lines: 7, 14
+   
+      .. tab::
+         :tabid: kotlin
+   
+         .. literalinclude:: /examples/CRUD/Transaction.kt
+            :language: kotlin
+            :emphasize-lines: 7, 14
 
 .. _android-create-an-object:
 
