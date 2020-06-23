@@ -1,6 +1,8 @@
 name = "realm"
 title = "MongoDB Realm"
 
+intersphinx = ["https://docs.atlas.mongodb.com/objects.inv"]
+
 [constants]
 package-name-org = "docs-realm"
 realm = "realm"
