@@ -274,6 +274,7 @@ line tool:
       Receiving objects: 100% (39/39), 7.25 KiB | 1.81 MiB/s, done.
       Resolving deltas: 100% (3/3), done.
 
+<<<<<<< HEAD
    The directory where you ran the above ``git clone`` command should now
    contain another directory called ``realm-tutorial-backend``. We'll use
    the contents of that directory to create your very own Task Tracker
@@ -504,6 +505,9 @@ start adding to-do tasks or even other users as project members.
    :ref:`documentation on triggers <triggers>`.
 
 .. _client-sdk-guides:
+=======
+.. figure:: /images/task-tracker-web-deploy-history.png
+>>>>>>> (DOCSP-12523): bordered-figure
 
 What's Next?
 ------------

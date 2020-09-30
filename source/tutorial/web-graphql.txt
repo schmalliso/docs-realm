@@ -318,7 +318,23 @@ following:
 
 Open your browser to http://localhost:3000 to access the app.
 
+<<<<<<< HEAD
 If the app builds successfully, here are some things you can try in the app:
+=======
+Register a New User
+~~~~~~~~~~~~~~~~~~~
+
+You need to register a user account before you can log in and use the tracker.
+On the login screen, click :guilabel:`Register one now` and enter the email
+address and password that you want to log in with. This is just a sample app
+that does not send any validation emails, so feel free to use a fake email
+address and/or simple password.
+
+.. figure:: /images/task-tracker-web-register-user.png
+
+Add Some Tasks
+~~~~~~~~~~~~~~
+>>>>>>> (DOCSP-12523): bordered-figure
 
 - Create a user with email *first@example.com*
 - Explore the app, then log out or launch a second instance of the app in an incognito browser window
@@ -332,6 +348,31 @@ If the app builds successfully, here are some things you can try in the app:
 - Navigate to *second@example.com*'s project
 - Collaborate by adding, updating, and removing some new tasks
 
+<<<<<<< HEAD
+=======
+.. figure:: /images/task-tracker-web-add-task.png
+
+Move Tasks Around
+~~~~~~~~~~~~~~~~~
+
+You can change the status of a task by dragging it between lists. You can also
+click on a task to open a detailed view with buttons that change the task's
+status and allow you to delete the task entirely.
+
+.. figure:: /images/task-tracker-web-move-task.png
+   :width: 750px
+
+Check Out the Logs
+~~~~~~~~~~~~~~~~~~
+
+Whenever you add, update, or delete a task, the client app sends a GraphQL
+request to Realm. You can see a history of requests on the :guilabel:`Logs` page
+of the Realm UI. Each GraphQL log entry shows the operation, compute usage, and
+rule evaluation summary.
+
+.. figure:: /images/task-tracker-web-graphql-logs.png
+   :width: 750px
+>>>>>>> (DOCSP-12523): bordered-figure
 
 What's Next?
 ------------
