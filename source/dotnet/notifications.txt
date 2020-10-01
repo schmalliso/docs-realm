@@ -1,4 +1,4 @@
-.. _react-native-client-notifications:
+.. _dotnet-client-notifications:
 
 =============
 Notifications
@@ -27,11 +27,11 @@ data, independent of the writes that caused the changes.
 
 Realm emits three kinds of notifications:
 
-- :ref:`Realm notifications <react-native-realm-notifications>` whenever a specific Realm commits a write transaction.
-- :ref:`Collection notifications <react-native-collection-notifications>` whenever any :term:`Realm object` in a collection changes, including inserts, updates, and deletes.
-- :ref:`Object notifications <react-native-object-notifications>` whenever a specific Realm object changes, including updates and deletes.
+- :ref:`Realm notifications <dotnet-realm-notifications>` whenever a specific Realm commits a write transaction.
+- :ref:`Collection notifications <dotnet-collection-notifications>` whenever any :term:`Realm object` in a collection changes, including inserts, updates, and deletes.
+- :ref:`Object notifications <dotnet-object-notifications>` whenever a specific Realm object changes, including updates and deletes.
 
-.. _react-native-subscribe-to-changes:
+.. _dotnet-subscribe-to-changes:
 
 Subscribe to Changes
 --------------------
@@ -43,7 +43,7 @@ Generally, this is how you observe a Realm, collection, or object:
 3. Receive a notification token from the call to add the handler. Retain this token as long as you want to observe.
 4. When you are done observing, invalidate the token.
 
-.. _react-native-realm-notifications:
+.. _dotnet-realm-notifications:
 
 Realm Notifications
 -------------------
@@ -72,13 +72,14 @@ granular notifications.
   .. tabs-realm-languages::
 
     .. tab::
-        :tabid: javascript
+        :tabid: c-sharp
 
-        .. literalinclude:: /examples/Notifications/RealmNotification.js
-          :language: javascript
-          :emphasize-lines: 6
+        .. literalinclude:: /examples/Notifications/RealmNotification.cs
+          :language: csharp
+          :emphasize-lines: 2
 
-.. _react-native-collection-notifications:
+
+.. _dotnet-collection-notifications:
 
 Collection Notifications
 ------------------------
@@ -119,14 +120,14 @@ list or other view that represents the collection in the UI.
   .. tabs-realm-languages::
 
     .. tab::
-        :tabid: javascript
+        :tabid: c-sharp
 
-        .. literalinclude:: /examples/Notifications/CollectionNotification.js
-          :language: javascript
-          :emphasize-lines: 26
+        .. literalinclude:: /examples/Notifications/CollectionNotification.cs
+          :language: csharp
+          :emphasize-lines: 2
 
 
-.. _react-native-object-notifications:
+.. _dotnet-object-notifications:
 
 Object Notifications
 --------------------
@@ -149,11 +150,12 @@ and whether the object was deleted.
   .. tabs-realm-languages::
 
     .. tab::
-        :tabid: javascript
+        :tabid: c-sharp
 
-        .. literalinclude:: /examples/Notifications/ObjectNotification.js
-          :language: javascript
-          :emphasize-lines: 13
+        .. literalinclude:: /examples/Notifications/ObjectNotification.cs
+          :language: csharp
+          :emphasize-lines: 22
+
 
 Summary
 -------
