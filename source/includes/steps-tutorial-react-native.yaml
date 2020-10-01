@@ -222,12 +222,92 @@ content: |
   descendants can use. As the name implies, the TasksProvider provides the task
   objects for a given project. The project partition is passed in as a prop.
 
+<<<<<<< HEAD
   The first thing to implement is the opening of the realm for the given
   project. Whereas the user realm used the partition key value pattern of
   ``user=<USER_ID>``, projects use the partition key value pattern of
   ``project=<USER_ID>``. For the sake of this tutorial's simplicity, each user
   always has exactly one project, specified by the partition key value
   containing their own user ID.
+=======
+  In order to provide the data and actions related to fetching, creating,
+  updating, and deleting Tasks to descendant components, we'll use the same
+  Context, Provider and Hook pattern we used for the AuthProvider.
+
+  In the AuthProvider component, we'll open a {+realm+}, fetch all Tasks in it,
+  and watch that collection of Tasks for changes. We'll also define the
+  following actions:
+
+  - Create a Task
+  - Update a Task's status
+  - Delete a Task
+
+  Create a new file called ``TasksProvider.js``. To begin, import everything we
+  will need -- including the ``useAuth`` hook and ``Task`` class we defined
+  earlier -- and create a Context object our TasksProvider can use:
+
+  .. code-block:: js
+
+     import React, {useContext, useState, useEffect, useRef} from 'react';
+     import Realm from 'realm';
+     import {useAuth} from './AuthProvider';
+     import {Task} from './schemas';
+
+     // Create the context that will be provided to descendants of TasksProvider via
+     // the useTasks hook.
+     const TasksContext = React.createContext(null);
+
+  Now, begin defining the TasksProvider component. The component accepts two
+  props: its children, of course, and a projectId to specify which subset of
+  Tasks to work with.
+
+  Use the ``useAuth`` hook to get the logged-in user and declare the state
+  variable that will contain the list of Tasks. We also use the `useRef hook
+  <https://reactjs.org/docs/hooks-reference.html#useref>`__ to store a reference
+  to our opened {+realm+}. We use ``useRef`` rather than ``useState`` for this
+  because we don't care to re-render when the realm itself changes.
+
+  .. code-block:: js
+
+     const TasksProvider = ({children, projectId}) => {
+       // Get the user from the AuthProvider context.
+       const {user} = useAuth();
+
+       // The tasks list will contain the tasks in the realm when opened.
+       const [tasks, setTasks] = useState([]);
+
+       // This realm does not need to be a state variable, because we don't re-render
+       // on changing the realm.
+       const realmRef = useRef(null);
+
+  Next, still within the definition of TasksProvider, we use the `useEffect hook
+  <https://reactjs.org/docs/hooks-reference.html#useeffect>`__ to implement our
+  logic for opening the {+realm+} and reading the Tasks. This effect callback
+  runs whenever the user or projectId prop changes, including when the component
+  first mounts.
+
+  Within the callback, we define the configuration we'll use to open the
+  {+realm+}. Notice we pass the user object from the authentication provider and
+  use the projectId as the partition value in the ``sync`` field of the
+  configuration. When opening a synced {+realm+} for a given partition value,
+  {+service+} checks whether the user has permissions to read and/or write for
+  that partition value. If the user is allowed to read with that partition
+  value, the {+realm+} contains all Tasks with that partition value. Otherwise,
+  the request to open fails.
+
+  .. note:: Check the Logs Tab in the {+ui+}
+     
+     When working with {+sync+}, remember to check the :guilabel:`Logs` page in
+     the {+ui+}. That page usually contains additional information that can help
+     you troubleshoot any issues you may encounter.
+
+  Upon successfully opening the {+realm+}, we read all Tasks from the {+realm+}
+  and attach a change listener to the collection of Tasks. When the change
+  listener fires -- due to a change to the Tasks -- we react by updating the
+  tasks list state variable with the latest list of Tasks. This causes a
+  re-render of all the child components, so they are essentially notified of the
+  change to the Tasks.
+>>>>>>> (DOCSP-12280): Convert generic admonitions to named admonitions
 
   In the effect block, open the realm. Once opened, attach an observer that will
   update the tasks list when any changes come in:

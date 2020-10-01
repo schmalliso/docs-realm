@@ -12,8 +12,7 @@ Task Tracker (Web)
    :depth: 1
    :class: singlecol
 
-.. admonition:: Check Out the Quick Start
-   :class: note
+.. note:: Check Out the Quick Start
    
    If you prefer to explore on your own rather than follow a guided tutorial,
    check out the :ref:`Web Quick Start <web-quick-start>`. It includes copyable
@@ -36,8 +35,7 @@ The app is a task tracker that allows users to:
 
 This tutorial should take around 30 minutes.
 
-.. admonition:: Realm Web SDK and Sync
-   :class: important
+.. important:: Realm Web SDK and Sync
    
    The Realm Web SDK does not support :ref:`sync <sync-overview>`, so the app
    you'll build in this tutorial won't update in real time when data changes.
@@ -61,7 +59,51 @@ Before you get started, you'll need the following:
 
 Once you're set up with these prerequisites, you're ready to start the tutorial.
 
+<<<<<<< HEAD
 A. Clone the Client App Repository
+=======
+.. note:: Download the Complete Source Code
+   
+   We host this tutorial application's :github:`complete and ready-to-run source
+   code <mongodb-university/realm-tutorial/tree/main/web>` on GitHub. You can
+   use it to check your work or download it to run the app locally.
+
+   To get started, follow the instructions in ``README.md``. Don't forget to
+   update the ``/src/realm/RealmApp.tsx`` file with your App ID, which you can
+   find in the {+ui+}.
+
+A. Define Data Access Permissions
+---------------------------------
+
+.. important:: Non-Sync Permissions
+   
+   The permissions in this step only apply if you do not enable sync for the
+   application. Sync permissions use a different rules system and override any
+   non-sync permissions when sync is enabled. If you plan to or have already
+   used the task tracker backend from one of the frontend apps that support
+   sync, then you can skip this section in favor of the sync permissions
+   described on the sync app's tutorial page.
+   
+   The Realm Web SDK and GraphQL API do not use sync, so if you only intend to
+   build a web client then use these rules.
+
+The backend app is set up with an email/password authentication provider that we
+can use to let users sign up and log in and an automatically generated GraphQL
+API that we can use work with data.
+
+By default, however, all GraphQL queries from a client application will fail.
+
+To allow users to read and write data, you must first define data access rules
+that determine whether a given user has read or write permissions for a given
+document.
+
+You define non-sync data access rules for your GraphQL API on the
+:guilabel:`Rules` screen of the Realm UI.
+
+.. include:: /includes/steps/task-tracker-server-rules.rst
+
+B. Clone the Client App Repository
+>>>>>>> (DOCSP-12280): Convert generic admonitions to named admonitions
 ----------------------------------
 
 We've already put together a task tracker browser application that has most of
@@ -122,8 +164,7 @@ with Realm. We've already completely implemented these so you won't need to add
 any code to these files. We'll make sure to show you along the way how these
 components and hooks use the code that you write.
 
-.. admonition:: React Components
-   :class: note
+.. note:: React Components
 
    React is a `popular
    <https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-web-frameworks>`__
@@ -148,8 +189,7 @@ authentication.
 
 .. include:: /includes/steps/task-tracker-web-realmapp.rst
 
-.. admonition:: How We Use It
-   :class: admonition-example
+.. example:: How We Use It
    
    In ``src/App.js``, we use the ``useRealmApp()`` hook to determine
    when the main application is ready to render. We also check for an
@@ -183,6 +223,7 @@ A GraphQL schema defines all of the types, enums, and scalars that a GraphQL
 API supports. Realm automatically generates a GraphQL schema for you, and you
 can use it to generate useful TypeScript types for your data.
 
+<<<<<<< HEAD
 In addition to generating types from a schema file, you can also generate
 functions and GraphQL objects for operations such as queries and mutations.
 You can split operations across multiple files, but in this tutorial we'll
@@ -229,6 +270,126 @@ following functions and call the appropriate mutations:
      :language: javascript
 
 E. Connect Apollo to the GraphQL API
+=======
+.. example:: How We Use It
+   
+   We import the generated types defined in ``/src/types.ts`` from multiple
+   components throughout the app that need to use data from the GraphQL API. For
+   example, in ``/src/components/TaskView.tsx`` we import the generated ``Task``
+   type and use it to type the component's ``task`` prop.
+   
+   .. code-block:: typescript
+      :caption: ``/src/components/TaskView.tsx``
+      
+      import { Task } from "../types";
+      
+      interface TaskViewProps {
+        task: Task;
+      }
+      
+      export function TaskView({ task }: TaskViewProps) {
+        const { assignee, name } = task;
+        const status = task.status as TaskStatus;
+        ...
+      }
+   
+   We use the custom Apollo hooks generated in ``/src/graphql-operations.ts`` to
+   call the GraphQL API as part of the task actions defined in ``useTasks()``.
+   
+   .. code-block:: typescript
+      :caption: ``/src/hooks/useTasks.tsx``
+      :emphasize-lines: 13-17, 20-22
+      
+      import { GetAllTasksQuery } from "./../types";
+      import {
+        useGetAllTasksQuery,
+        useAddTaskMutation,
+        useUpdateTaskMutation,
+        useDeleteTaskMutation,
+      } from "./../graphql-operations";
+
+      export function useTasks() {
+        const [tasks, setTasks] = React.useState<Task[]>([]);
+        
+        // Query for Tasks
+        const { loading } = useGetAllTasksQuery({ onCompleted: (data: GetAllTasksQuery) => {
+          if(data?.tasks) {
+            setTasks(data.tasks as Task[])
+          }
+        }});
+        
+        // Create Task Mutation Functions
+        const [addTaskMutation] = useAddTaskMutation();
+        const [updateTaskMutation] = useUpdateTaskMutation();
+        const [deleteTaskMutation] = useDeleteTaskMutation();
+
+        ...
+      }
+   
+   The custom query and mutation hooks are lightweight wrappers around Apollo's
+   ``useQuery()`` and ``useMutation()`` hooks. For example, you could define
+   ``useAddTaskMutation()`` yourself with the following code:
+   
+   .. code-block:: typescript
+      
+      import { Task, TaskInsertInput } from "../types";
+      import { useMutation } from "@apollo/client";
+      import gql from 'graphql-tag';
+      
+      type AddTaskMutation = { task: Task };
+      type AddTaskMutationVariables = { task: TaskInsertInput };
+      function useAddTaskMutation() {
+        return useMutation<AddTaskMutation, AddTaskMutationVariables>(gql`
+          mutation AddTask($task: TaskInsertInput!) {
+            task: insertOneTask(data: $task) {
+              _id
+              name
+              status
+              assignee {
+                _id
+                name
+                image
+              }
+            }
+          }
+        `);
+      }
+   
+   Later in the function, we use the functions returned from the mutation hooks
+   to execute the mutations.
+
+   .. code-block:: typescript
+      :caption: ``/src/components/TaskView.tsx``
+      :emphasize-lines: 5-14, 17
+      
+      export function useTasks() {
+        ...
+        
+        const addTask = async (task: Task) => {
+          const variables: AddTaskMutationVariables = {
+            task: {
+              status: task.status,
+              name: task.name,
+              _partition: "My Project",
+            },
+          };
+          if(task.assignee) {
+            variables.task.assignee = { link: task.assignee._id }
+          }
+          const currentTasks = [...tasks];
+          try {
+            const result = await addTaskMutation({ variables });
+            const task = result.data?.task as Task;
+            setTasks([...tasks, task]);
+          } catch (err) {
+            setTasks(currentTasks);
+            throw new Error("Unable to add task");
+          }
+        };
+      }
+
+F. Connect Apollo to the GraphQL API
+>>>>>>> (DOCSP-12280): Convert generic admonitions to named admonitions
 ------------------------------------
 
 We've defined GraphQL CRUD operations and created custom query and mutation hooks
@@ -404,4 +565,11 @@ options to keep practicing and learn more:
     methods, like API keys and Google OAuth, and associate :doc:`custom data
     </users/enable-custom-user-data>` with every user.
 
+<<<<<<< HEAD
 .. include:: /includes/tutorial-request-for-feedback-note.rst
+=======
+.. note:: Leave Feedback
+   
+   How did it go? Please let us know if this tutorial was helpful or if you had
+   any issues by using the feedback widget on the bottom right of the page.
+>>>>>>> (DOCSP-12280): Convert generic admonitions to named admonitions

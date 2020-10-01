@@ -9,8 +9,18 @@ content: |
      :caption: ``src/App.js``
      :language: javascript
 
+<<<<<<< HEAD
   .. admonition:: Use Your App ID
      :class: note
+=======
+  .. code-block:: typescript
+     :caption: ``src/realm/RealmApp.tsx``
+     
+     const REALM_APP_ID = "<Your App ID>"
+     const app = new Realm.App({ id: REALM_APP_ID });
+  
+  .. note:: Use Your App ID
+>>>>>>> (DOCSP-12280): Convert generic admonitions to named admonitions
      
      Make sure to replace ``"TODO"`` with your app's unique
      :guilabel:`App ID`. You can find your :guilabel:`App ID` by clicking the

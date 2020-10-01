@@ -26,8 +26,7 @@ In this tutorial, you will create a task tracker app that allows users to:
 
 This tutorial should take around 30 minutes.
 
-.. admonition:: Check Out the Quick Start
-   :class: note
+.. note:: Check Out the Quick Start
    
    If you prefer to explore on your own rather than follow a guided tutorial,
    check out the :ref:`iOS Quick Start <ios-client-quick-start>`. It includes
@@ -47,6 +46,17 @@ Before you begin, ensure you have:
 Set up the Mobile App
 ---------------------
 
+<<<<<<< HEAD
+=======
+.. note:: Download the Complete Source Code
+   
+   We host this tutorial application's :github:`complete and ready-to-compile
+   source code <mongodb-university/realm-tutorial/tree/main/swift-ios>` on GitHub.
+   Just follow the instructions in ``README.md`` to get started. Don't forget to
+   update the ``SceneDelegate.swift`` file with your App ID, which you can find in
+   the {+ui+}.
+
+>>>>>>> (DOCSP-12280): Convert generic admonitions to named admonitions
 .. include:: /includes/steps/tutorial-ios-swift.rst
 
 What's Next?

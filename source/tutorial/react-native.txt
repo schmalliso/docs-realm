@@ -27,8 +27,7 @@ application that allows users to:
 
 This tutorial should take around 30 minutes.
 
-.. admonition:: Check Out the Quick Start
-   :class: note
+.. note:: Check Out the Quick Start
    
    If you prefer to explore on your own rather than follow a guided tutorial,
    check out the :ref:`React Native Quick Start
@@ -54,6 +53,17 @@ Ensure that you have the following:
 Set up the Mobile App
 ---------------------
 
+<<<<<<< HEAD
+=======
+.. note:: Download the Complete Source Code
+   
+   We host this tutorial application's :github:`complete and ready-to-compile
+   source code <mongodb-university/realm-tutorial/tree/main/rn>` on GitHub.
+   Just follow the instructions in ``README.md`` to get started. Don't forget to
+   update the ``getRealmApp.js`` file with your App ID, which you can find in
+   the {+ui+}.
+
+>>>>>>> (DOCSP-12280): Convert generic admonitions to named admonitions
 .. include:: /includes/steps/tutorial-react-native.rst
 
 What's Next?
