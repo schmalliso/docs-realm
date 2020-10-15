@@ -1,1 +1,1 @@
-"build-and-stage-nextgen"
+"build-and-stage-next-gen"
