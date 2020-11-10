@@ -1,8 +1,10 @@
 .. _dotnet-intro:
 
-=============================
 MongoDB Realm .NET SDK (Beta)
-=============================
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Overview
+########
 
 The {+service+} .NET SDK enables client applications written in C# for
 the .NET, `UWP 
@@ -16,11 +18,12 @@ and authentication.
 
    The Realm .NET SDK is currently in Beta.
 
-
 .. _dotnet_supported-platforms:
 
+===================
 Supported Platforms
--------------------
+===================
+
 Realm supports the following platforms for developing Realm apps for iOS and 
 Android devices:
 
@@ -43,116 +46,56 @@ the .NET SDK:
 - Visual Studio 2015 Update 2 or higher for Windows
 - Visual Studio for Mac 7.0 or higher
 
-Installation
-------------
 
-To learn how to add the {+service+} .NET SDK library as a dependency
-to your application, see :ref:`Install Realm for .NET
-<dotnet-install>`.
+Get Started
+###########
 
-Realm Data Models
------------------
+.. include:: /dotnet/install.txt
+.. include:: /dotnet/quick-start.txt
 
-You can store a wide variety of data within {+realms+} stored on your
-device, and if you enable :term:`{+sync+}`, updates to that data are available 
-across multiple client devices. Data models are classes defined in your 
-code and in {+realm+} schemas.
 
-For information about the structure of data you can store in {+realms+},
-see :ref:`Realms <dotnet-realms>`, :ref:`Objects
-<dotnet-realm-objects>`, and :ref:`Relationships
-<dotnet-client-relationships>`.
+The Realm Data Model
+####################
 
-Building C# classes to represent the data you store in {+realm+} ensures data 
-consistency when serializing/deserializing and makes working with the data 
-simpler. 
+.. include:: /dotnet/realms.txt
+.. include:: /dotnet/open-a-realm.txt
+.. include:: /dotnet/objects.txt
+.. include:: /dotnet/embedded-objects.txt
+.. include:: /dotnet/relationships.txt
+.. include:: /dotnet/collections.txt
+.. include:: /dotnet/migrations.txt
+.. include:: /dotnet/client-reset.txt
 
-Work with a Realm Database
---------------------------
+Work with Realm Database
+########################
 
-Once you have defined the data model(s) for your application, you
-can :ref:`write <dotnet-realm-database-writes>` and
-:ref:`read <dotnet-realm-database-reads>` data to and from
-your {+realm+}s.
-
-To learn how to query for data in local {+realms+}, see
-:ref:`Query Engine <dotnet-client-query-engine>`.
-
-To learn about the results returned from {+realm+} queries, see
-:ref:`Collections <dotnet-client-collections>`.
-
-Mobile application development can be complicated by threading. To learn 
-how to work with {+backend-short+} across threads in your application, 
-see :ref:`Threading <dotnet-client-threading>`.
+.. include:: /dotnet/writes.txt
+.. include:: /dotnet/reads.txt
+.. include:: /dotnet/query-engine.txt
+.. include:: /dotnet/threading.txt
+.. include:: /dotnet/encrypt.txt
 
 Work with MongoDB Realm
------------------------
+#######################
 
-The .NET SDK also connects your {+service-short+} client application
-with your {+app+}'s backend services, including Functions, Services,
-Webhooks, {+sync+}, and built-in third-party authentication.
+.. include:: /dotnet/init-realmclient.txt
+.. include:: /dotnet/authenticate.txt
+.. include:: /dotnet/manage-email-password-users.txt
+.. include:: /dotnet/access-custom-user-data.txt
+.. include:: /dotnet/create-manage-api-keys.txt
+.. include:: /dotnet/work-with-multiple-users.txt
+.. include:: /dotnet/link-identities.txt
+.. include:: /dotnet/sync-data.txt
+.. include:: /dotnet/mongodb.txt
+.. include:: /dotnet/call-a-function.txt
 
-To learn how to connect to a {+backend+} app to call
-Functions, query data in an instance of {+atlas+}, and synchronize data
-in {+realms+}, see :doc:`Call a Function </functions/call-a-function>`.
+Reference
+#########
 
-To learn how to handle schema updates in your client application, see
-:ref:`Migrations <dotnet-client-migrations>`.
-
-.. toctree::
-   :titlesonly:
-   :caption: Get Started
-
-   Install Realm </dotnet/install>
-   Quick Start </dotnet/quick-start>
+.. include:: /dotnet/auxiliary-files.txt
+.. include:: /dotnet/compatibility.txt
 
 
-.. toctree::
-   :titlesonly:
-   :caption: The Realm Data Model
-   :hidden:
+.. seealso:: 
 
-   Realms </dotnet/realms>
-   Open and Close a Realm </dotnet/open-a-realm>
-   Objects </dotnet/objects>
-   Embedded Objects </dotnet/embedded-objects>
-   Relationships </dotnet/relationships>
-   Collections </dotnet/collections>
-   Migrations </dotnet/migrations>
-   Client Resets </dotnet/client-reset>
-
-.. toctree::
-   :titlesonly:
-   :caption: Work with Realm Database
-   :hidden:
-
-   Writes </dotnet/writes>
-   Reads </dotnet/reads>
-   Query Engine </dotnet/query-engine>
-   Threading </dotnet/threading>
-   Encrypt a Realm </dotnet/encrypt>
-
-.. toctree::
-   :titlesonly:
-   :caption: Work with MongoDB Realm
-   :hidden:
-
-   Initialize the Realm App Client </dotnet/init-realmclient>
-   Authenticate a User </dotnet/authenticate>
-   Manage Email/Password Users </dotnet/manage-email-password-users>
-   Access Custom User Data </dotnet/access-custom-user-data>
-   Create & Manage API Keys </dotnet/create-manage-api-keys>
-   Work with Multiple Users </dotnet/work-with-multiple-users>
-   Link User Identities </dotnet/link-identities>
-   Sync Data </dotnet/sync-data>
-   Remotely Access MongoDB </dotnet/mongodb>
-   Call a Function </dotnet/call-a-function>
-
-.. toctree::
-   :titlesonly:
-   :caption: Reference
-   :hidden:
-
-   Auxiliary Files </dotnet/auxiliary-files>
-   Platform and Framework Compatibility </dotnet/compatibility>
-   .NET SDK Reference Manual <https://docs.mongodb.com/realm-sdks/dotnet/10.0.0-beta.1>
+   https://docs.mongodb.com/realm-sdks/dotnet/10.0.0-beta.1>
