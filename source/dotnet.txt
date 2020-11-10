@@ -3,6 +3,13 @@
 MongoDB Realm .NET SDK (Beta)
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+Pre-Introduction
+################
+
+============
+Introduction
+============
+
 The {+service+} .NET SDK enables client applications written in C# for
 the .NET, `UWP 
 <https://docs.microsoft.com/en-us/windows/uwp/get-started/>`__,
