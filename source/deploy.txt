@@ -193,6 +193,7 @@ changes.
 
 .. figure:: /images/deployment-history-table.png
    :alt: The table of application deployment history logs in the {+ui+}
+   :border:
 
 Summary
 -------
